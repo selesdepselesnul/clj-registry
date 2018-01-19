@@ -19,4 +19,17 @@
 
 (deftest normalize-slash-test
   (testing "normalize slash"
-    (is (= "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion" (normalize-slash "SOFTWARE/Microsoft/Windows NT/CurrentVersion")))))
+    (is (= "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+           (normalize-slash "SOFTWARE/Microsoft/Windows NT/CurrentVersion")))))
+
+(defn test-setup
+  [f]
+  (f)
+  (delete-reg :HKCU "Software/Test"))
+
+(deftest create-reg-test
+  (testing "create registry"
+    (is (create-reg :HKCU "Software/Test"))
+    (is (not (create-reg :HKCU "Software/Test")))))
+
+(use-fixtures :once test-setup)

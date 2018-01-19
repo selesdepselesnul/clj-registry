@@ -27,3 +27,15 @@
    (get-reg-root root)
    (normalize-slash key)
    value))
+
+(defn create-reg [root key]
+  "Create a registry key"
+  (Advapi32Util/registryCreateKey
+   (get-reg-root root)
+   (normalize-slash key)))
+
+(defn delete-reg [root key]
+  "Delete a registry key"
+  (Advapi32Util/registryDeleteKey
+   (get-reg-root root)
+   (normalize-slash key)))
