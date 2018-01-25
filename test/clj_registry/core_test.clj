@@ -25,11 +25,11 @@
 (defn test-setup
   [f]
   (f)
-  (delete-reg :HKCU "Software/Test"))
+  (delete-key :HKCU "Software/Test"))
 
-(deftest create-reg-test
-  (testing "create registry"
-    (is (create-reg :HKCU "Software/Test"))
-    (is (not (create-reg :HKCU "Software/Test")))))
+(deftest create-key-test
+  (testing "create key"
+    (is (create-key :HKCU "Software/Test"))
+    (is (not (create-key :HKCU "Software/Test")))))
 
 (use-fixtures :once test-setup)
